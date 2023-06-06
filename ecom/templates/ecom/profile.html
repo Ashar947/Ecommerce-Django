@@ -1,0 +1,80 @@
+{% extends 'ecom/base.html' %}
+
+
+
+{% block css %}
+    <style>
+        .cont{
+            margin: 0px 10px;
+            /* display: flex; */
+        }
+        .prof_img{
+          height: 10rem;
+          border-radius: 12px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+
+
+      <br>
+      <div class="profile">
+        <div class="container bootstrap-snippet header-container">
+          <div class="bg-white">
+            <div class="container py-3">
+              <div class="media col-md-10 col-lg-8 col-xl-7 p-0 my-4 mx-auto">
+                <img class="prof_img" src="" alt="none" class="rounded-circle">
+                <div class="media-body ml-5">
+                  <br>
+                  <h4 class="font-weight-bold mb-4">{{user.first_name}} {{user.last_name}}</h4>
+                  <div class="text-muted mb-4">
+                    About Section ()()Lorem ipsum dolor sit amet, nibh suavitate qualisque ut nam. Ad harum primis electram duo, porro principes ei has.
+                  </div>
+          </div>
+      </div>
+      </div>
+          </div>
+        </div>
+      </div>
+      <div class="cont">
+        <div class="row g-3 mt-5 flex">
+            <div class="col-md-6">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-control" placeholder="{{user.first_name}}"name="FirstName" disabled>
+            </div>
+            <div class="col-md-6">
+              <label  class="form-label">Last Name</label>
+              <input type="text" class="form-control" name="LastName" placeholder="{{user.last_name}}" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email"  class="form-control" placeholder="{{user.email}}" name="email" disabled>
+            </div>
+            <div class="col-md-5">
+                <label for="inputZip" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" value="{{info.contact_number}}" name="ContactNumber"disabled>
+              </div>
+            <div class="col-12">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" class="form-control"name="address" value="{{info.address}}" disabled>
+            </div>
+            <div class="col-md-4">
+              <label for="inputCity" class="form-label">Country</label>
+              <input type="text" class="form-control" value="{{info.country}}" name="country"disabled>
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">City</label>
+              <input type="text" class="form-control" value="{{info.city}}" name="city"disabled>
+            </div>
+            
+      
+    </div>
+      </div>
+
+    <br>
+    <br>
+    <br>
+    .
+    {% endblock %}

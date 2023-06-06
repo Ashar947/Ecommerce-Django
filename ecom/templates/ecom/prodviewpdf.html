@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .conatiner{
+            /* border: 2px solid black; */
+            height: 30rem;
+            width: auto;
+            margin: 15px auto;
+        }
+        h1{
+            text-align: center;
+            text-decoration: underline;
+        }
+        .prodimg{
+            /* display: flex; */
+            margin-left: 10px;
+        }
+        h3{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="conatiner">
+        <h1>Product View</h1>
+        <div class="prodimg">
+            <h3>Product Name : {{prod_name}}</h3>
+            
+        </div>
+        <div class="prodimg">
+            <h3>Product Category : {{prod_cat}}</h3>   
+        </div>
+        <div class="prodimg">
+            <h3>Product Price : {{prod_price}}</h3>
+        </div>
+        <div class="prodimg">
+            <h3>Publish Date : {{prod_date}}</h3>
+        </div>
+    </div>
+</body>
+</html>

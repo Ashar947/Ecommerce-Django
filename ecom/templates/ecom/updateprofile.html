@@ -1,0 +1,54 @@
+{% extends 'ecom/base.html' %}
+
+{% block css %}
+  <style>
+    .cont {
+      margin: 0px 10px;
+    }
+  </style>
+{% endblock %}
+
+
+{% block body %}
+ <form action="{% url 'Change_User_Profile' %}" method="POST">
+  {% csrf_token %} 
+  <div class="cont">
+    <div class="row g-3 mt-5 flex">
+      <div class="col-md-6">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-control" value="{{user.first_name}}" name="FirstName">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-control" name="LastName" value="{{user.last_name}}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input type="email" disabled class="form-control" value="{{user.email}}" name="email">
+      </div>
+      <div class="col-md-5">
+        <label for="inputZip" class="form-label">Contact Number</label>
+        <input type="text" class="form-control" value="{{info.contact_number}}" name="ContactNumber">
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" name="address" value="{{info.address}}">
+      </div>
+      <div class="col-md-4">
+        <label for="inputCity" class="form-label">Country</label>
+        <input type="text" class="form-control" value="{{info.country}}" name="country">
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">City</label>
+        <input type="text" class="form-control" value="{{info.city}}" name="city">
+      </div>
+      <!-- <div class="col-md-4">
+        <label for="inputPic" class="form-label">Profile Picture</label>
+        <input type="file" class="form-control" name="image">
+      </div> -->
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+  </form>
+  {% endblock %}

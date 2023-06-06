@@ -1,0 +1,173 @@
+{% extends 'ecom/base.html' %}
+{% block title %} Home Page {% endblock %}
+
+{% block css %}
+
+{% load static %}
+
+
+
+<style>
+    #crousel-image {
+        height: 80vh;
+        width: 100%;
+    }
+
+    .crousesl-mg {
+        /* display: flex; */
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* width: 107vw; */
+        /* margin-top: 90px ;
+            margin-right: 90px ;
+            margin-left: 90px ;
+            margin-bottom: 90px; */
+        margin: 70px 20px 40px 20px;
+
+
+    }
+
+    .cat-card {
+        width: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
+
+    #catimage {
+        height: 8rem;
+        width: 8rem;
+        border: 2px solid black;
+        border-radius: 10rem;
+    }
+
+    .allprods {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .allcat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .prod-card {
+        width: 13rem;
+        height: 22rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        border: 3px solid grey;
+        margin: 0px 5px;
+        font-size: 25px;
+    }
+
+    .prodimage {
+        height: 120px;
+        width: 125px;
+        margin-top: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .bn {
+        height: 56px;
+        width: 81px;
+    }
+
+    .catcard {
+        font-size: 13px;
+        height: 32px;
+        text-align: c;
+    }
+    .point :hover{
+        cursor : pointer;
+        
+    }
+    .point a:hover{
+        color: blue;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'ecom/stylee.css' %}">
+<link rel="stylesheet" href="{% static 'ecom/swiper-bundle.min.css' %}">
+
+{% endblock %}
+
+
+{% block body %}
+<!------------ALL CATS---------->
+<h1 style="margin-left: 15px;">Shop by Category</h1>
+<br>
+<div class="slide-container swiper">
+    <div class="slide-content">
+        <div class="card-wrapper swiper-wrapper">
+            {% for i in Cats %}
+            <div class="card swiper-slide">
+                <div class="image-content">
+                    <span class="overlay"></span>
+
+                    <div class="card-image">
+                        <img src="/media/{{i.category_image}}" alt="....." class="card-img">
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <h2 class="name">{{i.category_name}}</h2>
+                    <button class="button"><a href="/ecom/category/{{i.id}}">View</a></button>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="swiper-button-next swiper-navBtn"></div>
+    <div class="swiper-button-prev swiper-navBtn"></div>
+    <div class="swiper-pagination"></div>
+</div>
+</div>
+<!------------------>
+
+<!-- ALL PRODS -->
+<h1 style="margin-left: 15px;">All Products</h1>
+<br>
+<div class="allprods">
+    {% for product in Prods %}
+    <div class="card prod-card" id="{{product.id}}">
+        <img  src="/media/{{product.Image}}" class="card-img-top prodimage" alt="...">
+        <div  class="card-body">
+            <a class="card-title point" href="/ecom/prodpdf/{{product.id}}"  style="font-size: 15px;">{{product.Name}}</a>
+            <button class="btn btn-outline-primary catcard">{{product.Category}}</button>
+            <p class="card-title">${{product.Price}}</p>
+            <div>
+                <a href="addtocart/{{product.id}}" class="btn btn-primary bn">Add to Cart</a>
+                <a href="addtowishlist/{{product.id}}" class="btn btn-primary bn">Add to Wishlist</a>
+            </div>
+        </div>
+    </div>
+    {% if forloop.counter|divisibleby:5 %}
+</div><br>
+<div class="allprods">
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+{% block js %}
+
+{% load static %}
+<!-- Swiper JS -->
+<script src="{% static 'ecom/swiper-bundle.min.js' %}"></script>
+
+<!-- JavaScript -->
+<script src="{% static 'ecom/script.js' %}"></script>
+
+{% endblock %}

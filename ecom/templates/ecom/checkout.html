@@ -1,0 +1,14 @@
+{% extends 'ecom/base.html' %}
+
+{% block body %}
+    {% csrf_token %}
+    <div class="py-5 text-center">
+      <h1>Checkout Page</h1>
+      <h5>Your Order id is : <strong>{{id}}</strong></h5>
+      <a type="button" href ="/ecom" class="btn btn-primary">Return to Home</a>
+    </div>
+    {% endblock %}
+
+
+    
+

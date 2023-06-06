@@ -1,0 +1,198 @@
+{% extends 'ecom/base.html' %}
+
+
+
+{% block css %}
+<style>
+  ul li {
+    padding: 0px 14px;
+  }
+
+  .quantity {
+    width: 3rem;
+  }
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2 id="cart">Cart</h2>
+    </div>
+    <!---------------------------------BILL----------------------------->
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">{{number}}</span>
+        </h4>
+        <ul class="list-group mb-3">
+          {% for cartobj in cart %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{cartobj.Name_Cart}} x <strong>{{cartobj.Quantity}}</strong></h6>
+              <!-- <small class="text-muted">Brief description</small> -->
+            </div>
+            <span id="calculateqty" class="text-muted">{{cartobj.sumtotal}}</span>
+          </li>
+          {% endfor %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong>${{total_price}}</strong>
+          </li>
+        </ul>
+
+        <!-- <button type="submit"  -->
+      </div>
+      <!-- BILLEND -->
+
+      <!--  -->
+      <div class="col-md-7 col-lg-8">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col" class="text-primary">Product Name</th>
+              <th scope="col" class="text-primary">Price</th>
+              <th scope="col" class="text-primary">Quantity</th>
+              <th scope="col" class="text-red">Delete</th>
+              <!-- <th scope="col" class="text-primary">Quantity</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for prod in cart %}
+            <tr>
+              <td>{{prod.Name_Cart}}</td>
+              <td>${{prod.Price_Cart}}</td>
+              <td><strong> <a href="/ecom/incqty/{{prod.id}}">+</a></strong> {{prod.Quantity}} <strong><a
+                    href="/ecom/decqty/{{prod.id}}">-</a></strong></td>
+              <td><a href="cartdel/{{prod.id}}" class="btn btn-danger">Delete</a></td>
+              <!-- <td><input type="number" id="quantity" name="quantity" min="1" max="10" value="1" style="width:3rem;"></td> -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+
+
+    </div>
+    </form>
+    <!------------------------------------------------>
+  </main>
+
+
+</div>
+
+<br>
+
+<div class="main">
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+          Personal Details
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+        aria-labelledby="panelsStayOpen-headingTwo">
+        <div class="accordion-body">
+          <form action="/ecom/checkout" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col">
+                <label class="form-label">First Name</label>
+                <input type="text" name="customer_name" class="form-control" value="{{user.first_name}}"
+                  aria-label="First name">
+              </div>
+              <div class="col">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="customer_lastname" value="{{user.last_name}}"
+                  aria-label="Last name">
+              </div>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" name="customer_email" class="form-control" id="inputEmail4" value="{{user.email}}">
+              </div>
+              <div class="col-md-6">
+                <label for="inputContact4" class="form-label">Phone Number</label>
+                <input type="text" name="customer_phone" class="form-control" value="{{info.contact_number}}">
+              </div>
+              <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <input type="text" name="customer_address" class="form-control" id="inputAddress"
+                  value="{{info.address}}">
+              </div>
+
+              <div class="col-md-4">
+                <label for="inputState" class="form-label">Country</label>
+                <input type="text" class="form-control" id="inputCountry" value="{{info.country}}">
+
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">City</label>
+                <input type="text" class="form-control" id="inputCity" value="{{info.city}}">
+              </div>
+              <div class="col-md-2">
+                <label for="inputZip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="inputZip" placeholder="Enter Zip Code">
+              </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio"  name="pay" onclick="showcard(1)" value="COD">
+                    <label class="form-check-label" for="exampleRadios1">
+                      COD (Cash On Delivery)
+                    </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="pay" onclick="showcard(2)" value="Card">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Pay with Card
+                  </label>
+                </div>
+              <div id="card-detail" style="display: none;">
+              <div class="col-md-4">
+                <label for="inputState" class="form-label">Card Number</label>
+                <input type="number" class="form-control" name="cardnum">
+
+              </div>
+              <div class="col-md-6">
+                <label for="inputCity" class="form-label">Expiration</label>
+                <input type="text" class="form-control" name="cardexp" placeholder="mmm/yy">
+              </div>
+              <div class="col-md-2">
+                <label for="inputZip" class="form-label">Cvv</label>
+                <input type="number" class="form-control" name="cardcvv">
+              </div>
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>
+  function showcard(val)
+  {
+    if (val==1)
+    {
+      document.getElementById('card-detail').style.display='none';
+    }
+    if (val==2)
+    {
+      document.getElementById('card-detail').style.display='block';
+    }
+
+  }
+</script>
+
+{% endblock %}

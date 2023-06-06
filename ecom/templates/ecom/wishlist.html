@@ -1,0 +1,29 @@
+{% extends 'ecom/base.html' %}
+
+
+
+
+    {% block body %}
+    <table class="table  table-hover ">
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Category</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in obj %}
+          <tr>
+            <td>{{i.Name}}</td>
+            <td>{{i.Category}}</td>
+            <td>{{i.Price}}</td>
+            <td>@mdo</td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+      {% endblock %}

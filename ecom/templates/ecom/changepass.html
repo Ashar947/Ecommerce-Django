@@ -1,0 +1,35 @@
+{% extends 'ecom/base.html' %}
+
+{% block css %}
+    <style>
+        .body_container{
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin: 5rem ;
+        }
+    </style>
+   {% endblock %}
+
+
+   {% block body %}
+    <div class="body_container">
+        <form action="{% url 'Update_Password' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Current Password</label>
+                <input type="password" class="form-control" name="oldpass">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">New Password</label>
+                <input type="password" class="form-control" name="NewPass">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Confrim Password</label>
+                <input type="password" class="form-control" name="confrimpass">
+              </div>
+              <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    {% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'ecom/base.html' %}
+{% block css %}
+<style>
+    .cont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+</style>
+{% endblock %}
+{% block body %}
+<br>
+<h1 style="text-align: center;"> Products for Order ID :{{Order.id}}</h1>
+<br>
+<br>
+<div class="cont">
+    <table class="table mytable" style="margin-left: 15px;margin-right: 15px;width: 50rem;">
+        <thead>
+            <tr>
+                <th scope="col" class="text-primary">Product Name</th>
+                <th scope="col" class="text-primary">Category</th>
+                <th scope="col" class="text-primary">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in data %}
+            <tr>
+                <td>{{x.Name}}</td>
+                <td>{{x.Category}}</td>
+                <td>{{x.Price}}</td>
+            </tr>
+            {% endfor %}
+            {% for y in data2 %}
+            <tr>
+                <td>{{y.Name}}</td>
+                <td>{{y.Category}}</td>
+                <td>{{y.Price}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td></td>
+                <td style="border:2px solid red;"><strong>Total</strong></td>
+                <td style="border:2px solid red;"><strong>{{total}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="cont">
+    <div class="row g-3 mt-5 flex mb-3" style="margin: 30px;">
+        <div class="col-md-6">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-control" placeholder="{{Order.customer_name}}" name="FirstName" disabled>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" value="{{Order.customer_email}}" name="email" disabled>
+        </div>
+        <div class="col-md-5">
+            <label for="inputZip" class="form-label">Contact Number</label>
+            <input type="text" class="form-control" value="{{Order.customer_contact}}" name="ContactNumber" disabled>
+        </div>
+        <div class="col-md-7">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" name="address" value="{{Order.customer_address}}" disabled>
+        </div>
+        {% if show %}
+        <div class="col-md-4">
+            <label for="inputAddress" class="form-label">Payment Method</label>    
+            <input type="text" class="form-control" name="address" value="{{Order.Payment_Method}}" disabled>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Card Number</label>
+            <input type="email" class="form-control" value="{{Order.Card_Nummber}}" name="email" disabled>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Card Expiration</label>
+            <input type="email" class="form-control" value="{{Order.Card_Expiration}}" name="email" disabled>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Cvv</label>
+            <input type="email" class="form-control" value="{{Order.Card_Cvv}}" name="email" disabled>
+        </div>
+        {% else %}
+        <div class="col-md-4">
+            <label for="inputAddress" class="form-label">Payment Method</label>    
+            <input type="text" class="form-control" name="address" value="{{Order.Payment_Method}}" disabled>
+        </div>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+    </div>
+</div>
+{% endblock %}
